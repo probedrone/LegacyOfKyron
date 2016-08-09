@@ -88,7 +88,7 @@ func _input(event):
 	if event.type == InputEvent.MOUSE_MOTION:
 		set_bone_rot(null, 0)
 		var currentAnm = get_node("AnimationPlayer").get_current_animation()
-		get_node("AnimationPlayer").get_animation(currentAnm).remove_track("Armature/Skeleton:torso")
+		get_node("AnimationPlayer").get_animation(currentAnm).remove_track(31)
 
 func _process(delta):
 	
@@ -98,7 +98,7 @@ func _process(delta):
 	var mpos2D = get_viewport().get_mouse_pos()
 	var center3D = get_node("2D_Systems/LookAt2D").get_pos()
 	
-	if mpos2D[0] < center3D[0]:#
+	if mpos2D[0] < center3D[0]:
 		get_node("Armature").set_rotation_deg(Vector3(0, 0, 0))
 		FacingDir = "Left"
 	elif mpos2D[0] > center3D[0]:
@@ -106,7 +106,8 @@ func _process(delta):
 		#mpos3 = armature.get_global_transform().inverse()*mpos3/0.15
 		FacingDir = "Right"	
 
-
+	set_bone_rot(null, 0)
+	
 func _integrate_forces(state):
 	
 #########################
@@ -133,3 +134,4 @@ func _integrate_forces(state):
 	if (Input.is_action_pressed("Jump")):
 		if (state.get_contact_count() >= 1):
 			apply_impulse(Vector3(), Vector3(0, 3.5, 0))
+
