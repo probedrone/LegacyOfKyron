@@ -6,7 +6,7 @@ extends RigidBody
 var torso_ang = Vector3()
 var skel
 var cam
-var tPlane = Plane(1,0,0,5)
+var tPlane = Plane(1,0,0,4)
 onready var mpos = Vector2(0, 0)
 var tc = TestCube.new()
 var FacingDir = "none"
@@ -22,6 +22,7 @@ func _ready():
 	cam = get_node("target/Camera")
 	armature = get_node("Armature")
 	armature.add_child(tc)
+	tPlane.d = get_global_transform().origin.x
 	set_process(true)
 
 
