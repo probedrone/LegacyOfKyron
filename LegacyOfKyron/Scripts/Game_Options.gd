@@ -6,7 +6,7 @@ extends Control
 # var b="textvar"
 
 #var Settings = Global.OptSettings
-onready var OptSettings = {}
+var OptSettings = {}
 
 func _init():
 	print(OptSettings)
@@ -15,7 +15,7 @@ func _init():
 		print("File does not exist")
 		OptSettings = {
 		"DisRes": Vector2(800, 600),
-		"Display_type": false,
+		"Disp_type": false,
 		"Shadow_Quality": 2,
 		"Model_Quality": 2,
 		"Texture_Quality": 2,
@@ -28,7 +28,7 @@ func _init():
 		"Subtitles": false,
 		}
 		OS.set_window_size(OptSettings["DisRes"])
-		OS.set_window_fullscreen(OptSettings["Display_type"])
+		OS.set_window_fullscreen(OptSettings["Disp_type"])
 		OS.set_use_vsync(OptSettings["VerticalSync"])
 		OS.set_window_resizable(false)
 		print(OptSettings)
@@ -39,7 +39,7 @@ func _ready():
 
 func _on_ApplyBut_pressed():
 	OS.set_window_size(OptSettings["DisRes"])
-	OS.set_window_fullscreen(OptSettings["Display_type"])
+	OS.set_window_fullscreen(OptSettings["Disp_type"])
 	OS.set_use_vsync(OptSettings["VerticalSync"])
 	print("Applying Changes")
 		
@@ -49,6 +49,7 @@ func _on_DisplayOpt_item_selected( ID ):
 		print(OptSettings["Display_type"])
 	elif get_node("Graphics/DisplayOpt").get_selected_ID() == 1:
 		OptSettings["Display_type"] = true
+		print(OptSettings["Display_type"])
 
 func _on_ConfirmationDialog_confirmed():
 	###########################################################################

@@ -14,6 +14,7 @@ var FacingDir = "none"
 var armature
 var mpos3 = Vector3()
 var newpose
+var idle = true
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -23,6 +24,7 @@ func _ready():
 	armature = get_node("Armature")
 	add_child(tc)
 	set_process(true)
+
 
 #Current track bone to mouse code
 func set_bone_rot(bone, ang):
@@ -78,24 +80,25 @@ func set_bone_rot(bone, ang):
 		print("End of debug block")
 		
 	#b.set_rotation(look_at(mpos3, Vector3(0,1,0))
+
 func _process(delta):
+	
+	set_bone_rot(null, 0)
 	
 	#############
 	#Facing Code#
 	#############
-	var mpos = get_viewport().get_mouse_pos()
+	var mpos2D = get_viewport().get_mouse_pos()
 	var center3D = get_node("2D_Systems/LookAt2D").get_pos()
 	
-	if mpos[0] < center3D[0]:#
+	if mpos2D[0] < center3D[0]:
 		get_node("Armature").set_rotation_deg(Vector3(0, 0, 0))
 		FacingDir = "Left"
-	elif mpos[0] > center3D[0]:
+	elif mpos2D[0] > center3D[0]:
 		get_node("Armature").set_rotation_deg(Vector3(0, 180, 0))
 		#mpos3 = armature.get_global_transform().inverse()*mpos3/0.15
-		FacingDir = "Right"
-	
-	if Input.set_mouse_mode(Input.Mouse
-	set_bone_rot(null, 0)
+		FacingDir = "Right"	
+
 	
 func _integrate_forces(state):
 	
@@ -123,7 +126,4 @@ func _integrate_forces(state):
 	if (Input.is_action_pressed("Jump")):
 		if (state.get_contact_count() >= 1):
 			apply_impulse(Vector3(), Vector3(0, 3.5, 0))
-	
-func anim_callback(arg):
-	#print(arg)
-	pass
+
